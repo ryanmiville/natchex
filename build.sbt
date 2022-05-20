@@ -1,6 +1,8 @@
 name := "natchex"
 
 ThisBuild / tlBaseVersion := "0.1"
+
+ThisBuild / licenses := Seq(License.MIT)
 ThisBuild / tlUntaggedAreSnapshots := false
 ThisBuild / tlSonatypeUseLegacyHost := false
 
