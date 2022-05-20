@@ -1,3 +1,0 @@
-package natchex
-
-object Trace
