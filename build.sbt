@@ -16,5 +16,8 @@ lazy val core = crossProject(JVMPlatform, JSPlatform)
   .in(file("core"))
   .settings(
     name := "core",
-    libraryDependencies += "org.tpolecat" %%% "natchez-core" % "0.1.6"
+    libraryDependencies ++= Seq(
+      "org.tpolecat" %%% "natchez-core" % "0.1.6",
+      "co.fs2" %%% "fs2-core" % "3.2.7"
+    )
   )

@@ -6,6 +6,7 @@ import natchez.EntryPoint
 import natchez.Kernel
 import natchez.Span
 import natchez.TraceValue
+import fs2.Stream
 
 import java.net.URI
 
@@ -13,6 +14,9 @@ trait Trace[F[_]] extends natchez.Trace[F] {
   def root[A](name: String)(k: F[A]): F[A]
   def continue[A](name: String, kernel: Kernel)(k: F[A]): F[A]
   def continueOrElseRoot[A](name: String, kernel: Kernel)(k: F[A]): F[A]
+
+  def spanResource[A](name: String)(k: Resource[F, A]): Resource[F, A]
+  def spanStream[A](name: String)(k: Stream[F, A]): Stream[F, A]
 }
 
 object Trace {
@@ -71,6 +75,17 @@ object Trace {
           def apply[A](fa: IO[A]): IO[A] =
             local.set(s).bracket(_ => fa)(_ => local.set(orig))
         }
+
+    def spanResource[A](name: String)(k: Resource[IO, A]): Resource[IO, A] =
+      spanK(name).flatMap { f =>
+        Resource(f(k.allocated).map {
+          case (a, release) =>
+            a -> f(release)
+        })
+      }
+
+    def spanStream[A](name: String)(k: Stream[IO, A]): Stream[IO, A] =
+      Stream.resource(spanK(name)).flatMap(k.translate)
   }
 
   private val noopSpan: Span[IO] = NoopSpan()
