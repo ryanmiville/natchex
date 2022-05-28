@@ -22,7 +22,7 @@ object StreamExample extends IOApp.Simple with PrintlnLogger {
 }
 
 /**
-  * [info] {
+  [info] {
   "name" : "stream_root",
   "service" : "stream-example",
   "timestamp" : "2022-05-28T17:25:45.899435Z",
