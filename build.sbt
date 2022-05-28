@@ -21,3 +21,14 @@ lazy val core = crossProject(JVMPlatform, JSPlatform)
       "co.fs2" %%% "fs2-core" % "3.2.7"
     )
   )
+
+lazy val examples = project
+  .in(file("examples"))
+  .settings(
+    name := "examples",
+    libraryDependencies ++= Seq(
+      "org.tpolecat" %%% "natchez-log" % "0.1.6",
+      "org.typelevel" %%% "log4cats-core" % "2.3.1",
+    )
+  )
+  .dependsOn(core.jvm)
