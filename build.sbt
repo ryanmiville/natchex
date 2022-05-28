@@ -9,7 +9,7 @@ ThisBuild / scalaVersion := "2.13.8"
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
-lazy val root = tlCrossRootProject.aggregate(core)
+lazy val root = tlCrossRootProject.aggregate(core, examples)
 
 lazy val core = crossProject(JVMPlatform, JSPlatform)
   .crossType(CrossType.Pure)
