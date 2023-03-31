@@ -1,5 +1,7 @@
 # Natchex 
 
+**Most of these ideas are now in Natchez so this repo has been archived**
+
 An EXtension of [NATCHez](https://github.com/tpolecat/natchez)'s `Trace` that supports creating new roots and tracing of `Resource` and `Stream`.
 
 The majority of this code is shamelessly copied from [Bayou](https://github.com/armanbilge/bayou) and [this Natchez pull request](https://github.com/tpolecat/natchez/pull/526).
